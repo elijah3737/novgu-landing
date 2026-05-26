@@ -1,0 +1,1881 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>От консультации к поступлению — НовГУ</title>
+<meta name="description" content="Обучающий лендинг для сотрудников приёмной комиссии НовГУ: как вести абитуриента по воронке поступления.">
+<style>
+/* ============================================================
+   1. ПЕРЕМЕННЫЕ И БАЗА
+   ============================================================ */
+:root {
+  --primary: #1B3A6B;
+  --primary-dark: #122951;
+  --primary-light: #2A5290;
+  --accent: #00A4B4;
+  --accent-light: #4FC3CF;
+  --bg: #F7F9FC;
+  --surface: #FFFFFF;
+  --text: #1A1F2E;
+  --text-muted: #6B7280;
+  --border: #E5E9F0;
+  --success: #10B981;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+  --shadow-sm: 0 1px 3px rgba(27,58,107,0.06), 0 1px 2px rgba(27,58,107,0.04);
+  --shadow-md: 0 4px 12px rgba(27,58,107,0.08), 0 2px 4px rgba(27,58,107,0.04);
+  --shadow-lg: 0 12px 32px rgba(27,58,107,0.12), 0 4px 8px rgba(27,58,107,0.06);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, svg { display: block; max-width: 100%; }
+
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+a { color: var(--accent); text-decoration: none; }
+
+/* ============================================================
+   2. ТИПОГРАФИКА
+   ============================================================ */
+h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; color: var(--text); }
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); letter-spacing: -0.01em; margin-bottom: 0.5rem; }
+h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
+h4 { font-size: 1.05rem; }
+p { color: var(--text); }
+.muted { color: var(--text-muted); }
+.lead { font-size: 1.15rem; color: var(--text-muted); line-height: 1.6; }
+
+/* ============================================================
+   3. ЛЭЙАУТ
+   ============================================================ */
+.container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+section { padding: 80px 0; position: relative; }
+section.alt { background: var(--surface); }
+
+.section-head { text-align: center; max-width: 760px; margin: 0 auto 48px; }
+.section-head .eyebrow {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: rgba(0,164,180,0.1);
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  section { padding: 56px 0; }
+  .container { padding: 0 16px; }
+}
+
+/* ============================================================
+   4. ШАПКА / НАВИГАЦИЯ
+   ============================================================ */
+.header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 24px; max-width: 1180px; margin: 0 auto;
+}
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 700; color: var(--primary); font-size: 1.05rem;
+}
+.logo-mark {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 800; font-size: 0.95rem;
+}
+.nav { display: flex; gap: 4px; align-items: center; }
+.nav a {
+  padding: 8px 12px; border-radius: var(--radius-sm);
+  color: var(--text-muted); font-size: 0.9rem; font-weight: 500;
+  transition: all var(--transition);
+}
+.nav a:hover { color: var(--primary); background: var(--bg); }
+
+.progress-bar {
+  height: 3px; background: var(--border); width: 100%;
+  position: relative; overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent));
+  width: 0%; transition: width 0.4s ease;
+}
+
+@media (max-width: 768px) {
+  .nav { display: none; }
+}
+
+/* ============================================================
+   5. КНОПКИ
+   ============================================================ */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 28px; border-radius: var(--radius-md);
+  font-weight: 600; font-size: 1rem;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--primary); color: white;
+  box-shadow: var(--shadow-md);
+}
+.btn-primary:hover { background: var(--primary-light); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.btn-secondary {
+  background: var(--surface); color: var(--primary);
+  border: 1.5px solid var(--border);
+}
+.btn-secondary:hover { border-color: var(--primary); background: rgba(27,58,107,0.04); }
+.btn-accent {
+  background: var(--accent); color: white;
+  box-shadow: var(--shadow-md);
+}
+.btn-accent:hover { background: var(--accent-light); transform: translateY(-2px); }
+.btn-sm { padding: 10px 18px; font-size: 0.9rem; }
+.btn-lg { padding: 16px 36px; font-size: 1.05rem; }
+
+/* ============================================================
+   6. ЭКРАН 0 — ВЫБОР РОЛИ
+   ============================================================ */
+.role-selector {
+  padding: 60px 0 40px;
+  background: linear-gradient(180deg, #F0F4FA 0%, var(--bg) 100%);
+}
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  max-width: 980px;
+  margin: 32px auto 0;
+}
+.role-card {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 24px 20px;
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.role-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.role-card.active { border-color: var(--primary); background: rgba(27,58,107,0.03); }
+.role-card .role-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  background: rgba(0,164,180,0.1); color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 12px;
+}
+.role-card.active .role-icon { background: var(--primary); color: white; }
+.role-card h4 { margin-bottom: 4px; color: var(--text); }
+.role-card p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+
+/* ============================================================
+   7. HERO
+   ============================================================ */
+.hero {
+  padding: 60px 0 100px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(0,164,180,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; }
+.hero h1 {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+}
+.hero .lead { font-size: clamp(1.05rem, 2vw, 1.3rem); margin-bottom: 36px; }
+.hero-stat {
+  display: inline-flex; align-items: center; gap: 18px;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 20px 28px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 36px;
+}
+.hero-stat-number {
+  font-size: 2.6rem; font-weight: 800; color: var(--accent);
+  line-height: 1;
+}
+.hero-stat-text {
+  text-align: left; font-size: 0.95rem; color: var(--text-muted); max-width: 280px;
+}
+.hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+.hero-path {
+  display: flex; justify-content: center; gap: 8px; margin-top: 60px; flex-wrap: wrap;
+}
+.hero-path-step {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--surface); padding: 10px 16px;
+  border-radius: 100px; font-size: 0.85rem; font-weight: 500;
+  border: 1px solid var(--border);
+}
+.hero-path-step .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+.hero-path-arrow { color: var(--text-muted); font-size: 1.2rem; }
+
+@media (max-width: 640px) {
+  .hero-stat { flex-direction: column; text-align: center; gap: 8px; padding: 20px; }
+  .hero-stat-text { text-align: center; }
+  .hero-path { display: none; }
+}
+
+/* ============================================================
+   8. ВОРОНКА
+   ============================================================ */
+.funnel-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+.funnel {
+  display: flex; flex-direction: column; gap: 8px;
+}
+.funnel-step {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  display: flex; align-items: center; gap: 16px;
+  cursor: pointer;
+  transition: all var(--transition);
+  position: relative;
+}
+.funnel-step:hover { border-color: var(--accent); transform: translateX(4px); }
+.funnel-step.active { border-color: var(--primary); background: linear-gradient(135deg, rgba(27,58,107,0.04), rgba(0,164,180,0.04)); }
+.funnel-step-num {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--bg); color: var(--text-muted);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.9rem;
+  flex-shrink: 0;
+  transition: all var(--transition);
+}
+.funnel-step.active .funnel-step-num { background: var(--primary); color: white; }
+.funnel-step-title { font-weight: 600; font-size: 0.95rem; }
+
+/* широковатые шаги для воронки */
+.funnel-step:nth-child(1) { margin-right: 0%; }
+.funnel-step:nth-child(2) { margin-right: 4%; }
+.funnel-step:nth-child(3) { margin-right: 8%; }
+.funnel-step:nth-child(4) { margin-right: 12%; }
+.funnel-step:nth-child(5) { margin-right: 16%; }
+.funnel-step:nth-child(6) { margin-right: 20%; }
+.funnel-step:nth-child(7) { margin-right: 24%; }
+.funnel-step:nth-child(8) { margin-right: 28%; }
+
+.funnel-detail {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-md);
+  position: sticky; top: 90px;
+  min-height: 240px;
+}
+.funnel-detail h3 { margin-bottom: 12px; color: var(--primary); }
+.funnel-detail .role { display: inline-block; padding: 4px 10px; border-radius: 100px; background: rgba(0,164,180,0.1); color: var(--accent); font-size: 0.8rem; font-weight: 600; margin-bottom: 16px; }
+.funnel-detail p { margin-bottom: 12px; line-height: 1.65; }
+.funnel-detail ul { padding-left: 20px; }
+.funnel-detail li { margin-bottom: 6px; }
+
+.funnel-note {
+  margin-top: 48px;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: white;
+  border-radius: var(--radius-md);
+  font-size: 1.05rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .funnel-wrap { grid-template-columns: 1fr; }
+  .funnel-step { margin-right: 0 !important; }
+  .funnel-detail { position: static; }
+}
+
+/* ============================================================
+   9. 7 ШАГОВ
+   ============================================================ */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.step-card {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  border: 1px solid var(--border);
+  transition: all var(--transition);
+  cursor: pointer;
+}
+.step-card:hover { border-color: var(--accent); box-shadow: var(--shadow-md); }
+.step-card-head {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+}
+.step-card-num {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+}
+.step-card h4 { margin: 0; }
+.step-card .phrase {
+  background: var(--bg);
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--accent);
+  font-style: italic;
+  color: var(--text);
+  font-size: 0.92rem;
+  margin-top: 12px;
+  display: none;
+}
+.step-card.expanded .phrase { display: block; }
+.step-card .toggle {
+  margin-top: 8px;
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* ============================================================
+   10. БАНК ВОПРОСОВ С ВКЛАДКАМИ
+   ============================================================ */
+.tabs {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+.tabs-nav {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  overflow-x: auto;
+}
+.tabs-nav button {
+  padding: 18px 24px;
+  font-weight: 600;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+  transition: all var(--transition);
+}
+.tabs-nav button:hover { color: var(--primary); }
+.tabs-nav button.active {
+  color: var(--primary);
+  border-bottom-color: var(--accent);
+  background: var(--surface);
+}
+.tabs-content { padding: 32px; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+.tab-panel ul { list-style: none; padding: 0; }
+.tab-panel li {
+  padding: 14px 18px;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+  border-left: 3px solid var(--accent);
+  font-size: 0.95rem;
+}
+.tab-panel .objection {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 16px;
+  align-items: start;
+  background: var(--bg);
+  padding: 16px 18px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+  border-left: 3px solid var(--warning);
+}
+.tab-panel .objection strong { color: var(--danger); display: block; margin-bottom: 4px; }
+.tab-panel .objection .answer { color: var(--text); font-size: 0.93rem; line-height: 1.55; }
+.tab-panel .objection .answer-label { font-weight: 600; color: var(--success); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+
+@media (max-width: 700px) {
+  .tab-panel .objection { grid-template-columns: 1fr; }
+  .tabs-content { padding: 20px; }
+}
+
+/* ============================================================
+   11. ТРЕНАЖЁР
+   ============================================================ */
+.simulator {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  box-shadow: var(--shadow-lg);
+}
+.simulator h2 { color: white; }
+.simulator-head {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 24px; flex-wrap: wrap; gap: 16px;
+}
+.simulator-progress { font-size: 0.9rem; color: rgba(255,255,255,0.7); }
+
+.sim-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.sim-list-item {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: all var(--transition);
+  display: flex; align-items: center; gap: 10px;
+}
+.sim-list-item:hover { background: rgba(255,255,255,0.15); }
+.sim-list-item.completed { background: rgba(16,185,129,0.2); border-color: var(--success); }
+.sim-list-item .sim-num { font-weight: 700; color: var(--accent-light); font-size: 0.85rem; }
+.sim-list-item .sim-title { font-size: 0.9rem; }
+.sim-list-item .check { margin-left: auto; color: var(--success); display: none; }
+.sim-list-item.completed .check { display: block; }
+
+.sim-stage {
+  background: rgba(255,255,255,0.06);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  margin-top: 24px;
+  display: none;
+}
+.sim-stage.active { display: block; }
+
+.sim-reply {
+  background: rgba(255,255,255,0.1);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin-bottom: 24px;
+  position: relative;
+  border-left: 3px solid var(--accent-light);
+}
+.sim-reply .who { font-size: 0.8rem; color: var(--accent-light); font-weight: 600; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+.sim-reply .text { font-size: 1.05rem; line-height: 1.6; }
+
+.sim-options { display: flex; flex-direction: column; gap: 10px; }
+.sim-option {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+  color: white;
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--transition);
+  font-size: 0.95rem;
+}
+.sim-option:hover:not(:disabled) {
+  background: rgba(255,255,255,0.15);
+  transform: translateX(4px);
+}
+.sim-option:disabled { cursor: default; opacity: 0.6; }
+.sim-option.good-revealed { border-color: var(--success); background: rgba(16,185,129,0.15); }
+.sim-option.mid-revealed { border-color: var(--warning); background: rgba(245,158,11,0.15); }
+.sim-option.bad-revealed { border-color: var(--danger); background: rgba(239,68,68,0.15); }
+
+.sim-feedback {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,0.08);
+  border-left: 4px solid var(--accent);
+  display: none;
+}
+.sim-feedback.show { display: block; }
+.sim-feedback .label { font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+.sim-feedback.good .label { color: var(--success); }
+.sim-feedback.mid .label { color: var(--warning); }
+.sim-feedback.bad .label { color: var(--danger); }
+.sim-feedback p { color: rgba(255,255,255,0.9); font-size: 0.95rem; line-height: 1.55; }
+.sim-next { margin-top: 16px; display: flex; justify-content: flex-end; gap: 8px; }
+
+.sim-results {
+  text-align: center;
+  padding: 24px 0;
+}
+.sim-results h3 { color: white; margin-bottom: 8px; }
+.sim-criteria {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin: 20px 0;
+}
+.sim-criterion {
+  background: rgba(255,255,255,0.08);
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+}
+.sim-criterion.met { background: rgba(16,185,129,0.2); border: 1px solid var(--success); }
+
+@media (max-width: 700px) {
+  .simulator { padding: 24px; }
+  .sim-stage { padding: 18px; }
+}
+
+/* ============================================================
+   12. ЭТИЧЕСКАЯ РАМКА
+   ============================================================ */
+.ethics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.ethics-card {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  border-top: 4px solid;
+  box-shadow: var(--shadow-sm);
+}
+.ethics-card.good { border-top-color: var(--success); }
+.ethics-card.bad { border-top-color: var(--danger); }
+.ethics-card h4 { margin-bottom: 16px; }
+.ethics-card.good h4 { color: var(--success); }
+.ethics-card.bad h4 { color: var(--danger); }
+.ethics-card ul { list-style: none; padding: 0; }
+.ethics-card li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.95rem;
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.ethics-card li:last-child { border-bottom: none; }
+.ethics-card li::before {
+  content: ''; flex-shrink: 0;
+  width: 18px; height: 18px; border-radius: 50%;
+  margin-top: 2px;
+  background-size: 12px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.ethics-card.good li::before {
+  background-color: rgba(16,185,129,0.15);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2310B981' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+}
+.ethics-card.bad li::before {
+  background-color: rgba(239,68,68,0.15);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23EF4444' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E");
+}
+
+@media (max-width: 700px) { .ethics { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   13. ЧЕК-ЛИСТ + АССЕТЫ
+   ============================================================ */
+.checklist-wrap {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 32px;
+}
+.checklist {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-md);
+}
+.checklist h3 { margin-bottom: 8px; }
+.checklist .lead { margin-bottom: 24px; }
+.checklist-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  user-select: none;
+}
+.checklist-item:last-child { border-bottom: none; }
+.checklist-checkbox {
+  width: 24px; height: 24px; border-radius: 6px;
+  border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition);
+}
+.checklist-item.checked .checklist-checkbox {
+  background: var(--success);
+  border-color: var(--success);
+}
+.checklist-item.checked .checklist-checkbox::after {
+  content: ''; width: 12px; height: 6px;
+  border-left: 2px solid white; border-bottom: 2px solid white;
+  transform: rotate(-45deg) translate(0, -2px);
+}
+.checklist-item.checked .checklist-text { text-decoration: line-through; color: var(--text-muted); }
+.checklist-text { font-size: 0.95rem; }
+.checklist-complete {
+  margin-top: 24px;
+  padding: 20px;
+  background: linear-gradient(135deg, var(--success), #059669);
+  color: white;
+  border-radius: var(--radius-md);
+  text-align: center;
+  font-weight: 500;
+  display: none;
+}
+.checklist-complete.show { display: block; }
+
+.assets {
+  display: flex; flex-direction: column; gap: 14px;
+}
+.asset-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex; gap: 16px; align-items: center;
+  transition: all var(--transition);
+  cursor: pointer;
+}
+.asset-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.asset-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: rgba(0,164,180,0.1); color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.asset-card h4 { margin-bottom: 2px; font-size: 1rem; }
+.asset-card p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+
+@media (max-width: 900px) {
+  .checklist-wrap { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   14. АТТЕСТАЦИЯ
+   ============================================================ */
+.attestation {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  box-shadow: var(--shadow-md);
+  max-width: 760px;
+  margin: 0 auto;
+}
+.attestation-intro { text-align: center; }
+.attestation-intro h3 { margin-bottom: 8px; }
+.attestation-intro .lead { margin-bottom: 24px; }
+.attestation-form { display: none; }
+.attestation-form.active { display: block; }
+.attestation-q {
+  display: none;
+}
+.attestation-q.active { display: block; }
+.attestation-q-head {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 16px;
+}
+.attestation-q-num { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
+.attestation-q-text { font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; line-height: 1.4; }
+.attestation-options { display: flex; flex-direction: column; gap: 10px; }
+.attestation-option {
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--transition);
+  font-size: 0.95rem;
+}
+.attestation-option:hover { border-color: var(--accent); }
+.attestation-option.selected { border-color: var(--primary); background: rgba(27,58,107,0.04); }
+.attestation-controls {
+  display: flex; justify-content: space-between; margin-top: 28px;
+  padding-top: 20px; border-top: 1px solid var(--border);
+}
+.attestation-result {
+  display: none;
+  text-align: center;
+  padding: 20px 0;
+}
+.attestation-result.active { display: block; }
+.attestation-result .score {
+  font-size: 4rem; font-weight: 800;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+}
+.attestation-result .verdict {
+  font-size: 1.3rem; font-weight: 700; margin-top: 8px;
+}
+.attestation-result.passed .verdict { color: var(--success); }
+.attestation-result.failed .verdict { color: var(--danger); }
+.attestation-result p { margin: 12px 0 24px; }
+.attestation-name {
+  width: 100%; padding: 12px 16px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  margin: 16px 0;
+  font-family: inherit;
+}
+.attestation-name:focus { border-color: var(--accent); outline: none; }
+
+/* ============================================================
+   15. ФИНАЛ
+   ============================================================ */
+.final {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  text-align: center;
+  padding: 100px 0;
+}
+.final h2 { color: white; max-width: 720px; margin: 0 auto 20px; }
+.final .lead { color: rgba(255,255,255,0.85); max-width: 600px; margin: 0 auto 32px; }
+.final-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.final-cta .btn-secondary { background: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.2); }
+.final-cta .btn-secondary:hover { background: rgba(255,255,255,0.2); }
+
+/* ============================================================
+   16. ФУТЕР
+   ============================================================ */
+.footer {
+  padding: 32px 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+}
+
+/* ============================================================
+   17. УТИЛИТЫ / АНИМАЦИИ
+   ============================================================ */
+.fade-in {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* ============================================================
+   18. ПЕЧАТЬ (для сертификата и карточки)
+   ============================================================ */
+@media print {
+  body * { visibility: hidden; }
+  .print-area, .print-area * { visibility: visible; }
+  .print-area {
+    position: absolute; left: 0; top: 0; width: 100%; padding: 40px;
+  }
+}
+.print-area { display: none; }
+
+.certificate {
+  border: 8px double var(--primary);
+  padding: 60px 40px;
+  text-align: center;
+  background: white;
+}
+.certificate h1 { color: var(--primary); margin-bottom: 16px; }
+.certificate .cert-name {
+  font-size: 2rem; font-weight: 700;
+  margin: 24px 0; color: var(--accent);
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 12px;
+}
+.certificate .cert-meta { margin-top: 32px; color: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     ШАПКА С НАВИГАЦИЕЙ И ПРОГРЕССОМ
+     ============================================================ -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-mark">Н</div>
+      <span>НовГУ · Приёмная комиссия</span>
+    </div>
+    <nav class="nav">
+      <a href="#funnel">Воронка</a>
+      <a href="#steps">Шаги</a>
+      <a href="#questions">Вопросы</a>
+      <a href="#simulator">Тренажёр</a>
+      <a href="#checklist">Чек-лист</a>
+      <a href="#attestation">Аттестация</a>
+    </nav>
+  </div>
+  <div class="progress-bar"><div class="progress-bar-fill" id="progressBar"></div></div>
+</header>
+
+<!-- ============================================================
+     ЭКРАН 0 — ВЫБОР РОЛИ
+     ============================================================ -->
+<section class="role-selector" id="role">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Шаг 1 из 10</span>
+      <h2>Выберите свою роль</h2>
+      <p class="lead">Подсветим релевантные сценарии. Можно сменить в любой момент.</p>
+    </div>
+    <div class="role-grid" id="roleGrid">
+      <button class="role-card" data-role="hotline">
+        <div class="role-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <h4>Горячая линия</h4>
+        <p>Принимаю звонки, ограничен по времени</p>
+      </button>
+      <button class="role-card" data-role="office">
+        <div class="role-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+        </div>
+        <h4>Очная ПК</h4>
+        <p>Работаю за столом, абитуриент пришёл лично</p>
+      </button>
+      <button class="role-card" data-role="institute">
+        <div class="role-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <h4>Представитель института</h4>
+        <p>Веду абитуриентов по конкретному направлению</p>
+      </button>
+      <button class="role-card" data-role="social">
+        <div class="role-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <h4>Соцсети и мессенджеры</h4>
+        <p>Веду переписку в ВК, Telegram</p>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ЭКРАН 1 — HERO
+     ============================================================ -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <h1>От консультации<br>к поступлению</h1>
+      <p class="lead">Как приёмной комиссии НовГУ вести абитуриента по воронке: выявлять потребности, собирать данные и доводить до подачи документов.</p>
+
+      <div class="hero-stat">
+        <div class="hero-stat-number">72%</div>
+        <div class="hero-stat-text">абитуриентов выбирают вуз после <strong>первого живого контакта</strong></div>
+      </div>
+
+      <div class="hero-cta">
+        <a href="#funnel" class="btn btn-primary btn-lg">Начать разбор</a>
+        <a href="#checklist" class="btn btn-secondary btn-lg">Экспресс 5 минут</a>
+      </div>
+
+      <div class="hero-path">
+        <div class="hero-path-step"><span class="dot"></span>Вопрос</div>
+        <div class="hero-path-arrow">→</div>
+        <div class="hero-path-step"><span class="dot"></span>Контакт</div>
+        <div class="hero-path-arrow">→</div>
+        <div class="hero-path-step"><span class="dot"></span>Направление</div>
+        <div class="hero-path-arrow">→</div>
+        <div class="hero-path-step"><span class="dot"></span>Подача документов</div>
+        <div class="hero-path-arrow">→</div>
+        <div class="hero-path-step"><span class="dot"></span>Студент НовГУ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ЭКРАН 2 — ВОРОНКА АБИТУРИЕНТА
+     ============================================================ -->
+<section class="alt" id="funnel">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Воронка</span>
+      <h2>Каждое обращение — это вход в воронку поступления</h2>
+      <p class="lead">Нажмите на этап, чтобы увидеть, что делает сотрудник на каждом шаге.</p>
+    </div>
+
+    <div class="funnel-wrap">
+      <div class="funnel" id="funnelList"><!-- JS заполнит --></div>
+      <aside class="funnel-detail" id="funnelDetail">
+        <h3>Нажмите на этап слева</h3>
+        <p class="muted">Здесь появится описание этапа и роль сотрудника.</p>
+      </aside>
+    </div>
+
+    <div class="funnel-note">
+      Чем больше качественных данных собрано на первом контакте, тем выше шанс довести абитуриента до подачи документов.
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ЭКРАН 3 — 7 ШАГОВ
+     ============================================================ -->
+<section id="steps">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Алгоритм</span>
+      <h2>7 шагов правильного разговора</h2>
+      <p class="lead">Нажмите на карточку, чтобы увидеть пример фразы.</p>
+    </div>
+    <div class="steps-grid" id="stepsGrid"><!-- JS --></div>
+    <div class="funnel-note" style="margin-top: 32px;">
+      Каждый разговор должен заканчиваться <strong>следующим шагом</strong>, а не точкой.
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ЭКРАН 4 — БАНК ВОПРОСОВ И ВОЗРАЖЕНИЙ
+     ============================================================ -->
+<section class="alt" id="questions">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Инструменты</span>
+      <h2>Банк вопросов и возражений</h2>
+      <p class="lead">Готовые формулировки, чтобы не искать слова в моменте.</p>
+    </div>
+
+    <div class="tabs">
+      <div class="tabs-nav" id="tabsNav"></div>
+      <div class="tabs-content" id="tabsContent"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ЭКРАН 5 — ТРЕНАЖЁР ДИАЛОГОВ
+     ============================================================ -->
+<section id="simulator">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Практика</span>
+      <h2>Тренажёр: как не потерять абитуриента</h2>
+      <p class="lead">8 ситуаций с разбором ответов «плохо / средне / хорошо».</p>
+    </div>
+
+    <div class="simulator">
+      <div class="simulator-head">
+        <h3 style="color: white; margin: 0;">Выберите ситуацию</h3>
+        <div class="simulator-progress" id="simProgress">Пройдено: 0 из 8</div>
+      </div>
+      <div class="sim-list" id="simList"></div>
+      <div class="sim-stage" id="simStage"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ЭКРАН 6 — ЭТИЧЕСКАЯ РАМКА
+     ============================================================ -->
+<section class="alt" id="ethics">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Граница</span>
+      <h2>Сопровождение vs давление</h2>
+      <p class="lead">Помощь в выборе — это не продажа любой ценой. Где проходит граница.</p>
+    </div>
+
+    <div class="ethics">
+      <div class="ethics-card good">
+        <h4>Сопровождение</h4>
+        <ul>
+          <li>Уточняем ситуацию, чтобы помочь сориентироваться</li>
+          <li>Предлагаем варианты, исходя из интересов абитуриента</li>
+          <li>Договариваемся о следующем шаге, который удобен ему</li>
+          <li>Принимаем «мне нужно подумать» как нормальный ответ</li>
+          <li>Передаём подходящему специалисту, если вопрос не наш</li>
+        </ul>
+      </div>
+      <div class="ethics-card bad">
+        <h4>Давление</h4>
+        <ul>
+          <li>Уговариваем подать документы прямо сейчас, без выбора</li>
+          <li>Преувеличиваем рейтинги и преимущества</li>
+          <li>Звоним повторно без согласия и в неудобное время</li>
+          <li>Игнорируем «нет» — продолжаем уговаривать</li>
+          <li>Скрываем минусы направления, лишь бы не упустить</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ЭКРАН 7 — ЧЕК-ЛИСТ + АССЕТЫ
+     ============================================================ -->
+<section id="checklist">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Контроль</span>
+      <h2>Чек-лист успешного разговора</h2>
+      <p class="lead">Отметьте после звонка — и сразу видно, был ли это шаг по воронке.</p>
+    </div>
+
+    <div class="checklist-wrap">
+      <div class="checklist" id="checklistEl">
+        <h3>Разговор продвинул абитуриента дальше?</h3>
+        <p class="lead">Минимум 6 из 8 — хороший контакт.</p>
+        <div id="checklistItems"></div>
+        <div class="checklist-complete" id="checklistComplete">
+          Отлично. Это уже не консультация, а сопровождение по воронке.
+        </div>
+      </div>
+
+      <div class="assets">
+        <h3 style="margin-bottom: 4px;">Печатные ассеты</h3>
+        <p class="muted" style="margin-bottom: 8px;">Что забрать после прохождения.</p>
+
+        <div class="asset-card" onclick="printCard()">
+          <div class="asset-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg>
+          </div>
+          <div>
+            <h4>Карточка на стол (A5)</h4>
+            <p>7 шагов + банк вопросов. Печать на двух сторонах.</p>
+          </div>
+        </div>
+
+        <div class="asset-card" onclick="downloadCRMTemplate()">
+          <div class="asset-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div>
+            <h4>Шаблон CRM-карты</h4>
+            <p>Обязательные и опциональные поля для CRM.</p>
+          </div>
+        </div>
+
+        <div class="asset-card" onclick="document.getElementById('attestation').scrollIntoView({behavior:'smooth'})">
+          <div class="asset-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+          </div>
+          <div>
+            <h4>Сертификат после аттестации</h4>
+            <p>Генерируется на основе ваших ответов в тесте.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ЭКРАН 8 — АТТЕСТАЦИЯ
+     ============================================================ -->
+<section class="alt" id="attestation">
+  <div class="container">
+    <div class="attestation">
+      <div class="attestation-intro" id="attestationIntro">
+        <span class="eyebrow">Финальная проверка</span>
+        <h3>Аттестация: 10 вопросов</h3>
+        <p class="lead">Минимум 8 правильных, чтобы получить именной сертификат.</p>
+        <button class="btn btn-primary btn-lg" onclick="startAttestation()">Начать тест</button>
+      </div>
+
+      <div class="attestation-form" id="attestationForm">
+        <div id="attestationQuestions"></div>
+        <div class="attestation-controls">
+          <button class="btn btn-secondary" id="attPrev" onclick="navAttestation(-1)">Назад</button>
+          <button class="btn btn-primary" id="attNext" onclick="navAttestation(1)">Далее</button>
+        </div>
+      </div>
+
+      <div class="attestation-result" id="attestationResult"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ЭКРАН 9 — ФИНАЛ
+     ============================================================ -->
+<section class="final" id="final">
+  <div class="container">
+    <h2>Каждый контакт должен завершаться<br>не точкой, а следующим шагом</h2>
+    <p class="lead">Мы не просто консультируем. Мы помогаем абитуриенту выбрать НовГУ и дойти до подачи документов.</p>
+    <div class="final-cta">
+      <a href="#role" class="btn btn-accent btn-lg">Пройти ещё раз</a>
+      <button class="btn btn-secondary btn-lg" onclick="printCard()">Скачать карточку</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ФУТЕР
+     ============================================================ -->
+<footer class="footer">
+  <div class="container">
+    Обучающий материал · Новгородский государственный университет · v2.0
+  </div>
+</footer>
+
+<!-- ============================================================
+     ОБЛАСТЬ ПЕЧАТИ (карточка/сертификат)
+     ============================================================ -->
+<div class="print-area" id="printArea"></div>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+/* ============================================================
+   ДАННЫЕ — контент в одном месте, легко обновлять
+   ============================================================ */
+const FUNNEL_STEPS = [
+  { title: "Обратился с вопросом", role: "Любой сотрудник", text: "Первый сигнал интереса. Не закрываем диалог простым ответом — берём паузу и уточняем контекст." },
+  { title: "Оставил контакт", role: "Любой сотрудник", text: "Без контакта мы не сможем вернуться к диалогу. Минимум — имя и телефон.", list: ["Имя", "Телефон или мессенджер", "Удобное время связи"] },
+  { title: "Рассказал о ситуации", role: "Очная ПК, горячая линия", text: "Понимаем класс, экзамены, регион, мотивацию. Это база для рекомендации." },
+  { title: "Обозначил направления", role: "Представитель института", text: "Чем точнее интерес, тем релевантнее рекомендация. Не давим — помогаем сузить." },
+  { title: "Получил рекомендацию", role: "Любой сотрудник", text: "Конкретные направления и проходные баллы. Абитуриент видит заботу и конкретику." },
+  { title: "Согласился на повторный контакт", role: "Любой сотрудник", text: "Фиксируем дату следующего разговора. Университет не ждёт пассивно." },
+  { title: "Подал документы", role: "ПК", text: "Ключевой целевой шаг воронки. До него нужно довести минимум 30–40% обратившихся." },
+  { title: "Стал студентом НовГУ", role: "Итог", text: "Финальный результат работы воронки приёмной комиссии." }
+];
+
+const STEPS = [
+  { title: "Приветствие и контакт", phrase: "«Здравствуйте! Меня зовут [имя], я из приёмной комиссии НовГУ. Как могу к вам обращаться?»" },
+  { title: "Ответ на первичный вопрос", phrase: "Короткий конкретный ответ. Не уходим в монолог про вуз." },
+  { title: "Уточнение ситуации", phrase: "«Чтобы точнее подсказать — какие направления вы рассматриваете и какие экзамены сдаёте?»" },
+  { title: "Выявление интереса", phrase: "«Что для вас важнее при выборе: направление, бюджет, общежитие, практика, трудоустройство?»" },
+  { title: "Сбор ключевых данных", phrase: "«Можно я зафиксирую ваш контакт, чтобы вернуться после результатов и подсказать подходящие варианты?»" },
+  { title: "Предложение следующего шага", phrase: "«Давайте договоримся: когда будут результаты, мы свяжемся и посмотрим, что подходит под ваши баллы.»" },
+  { title: "Фиксация договорённости", phrase: "«Записал: позвоню вам [дата] во второй половине дня. Что-то ещё уточнить сейчас?»" }
+];
+
+const TABS = [
+  { id: "direction", title: "Направление", items: [
+    "Какие направления вы рассматриваете?",
+    "Что вам интересно изучать?",
+    "Есть ли уже выбранный институт или программа?",
+    "Вы больше ориентируетесь на профессию, предметы или перспективы трудоустройства?"
+  ]},
+  { id: "exams", title: "Экзамены и баллы", items: [
+    "Какие экзамены вы сдаёте?",
+    "На какие баллы примерно рассчитываете?",
+    "Есть ли предмет, по которому вы чувствуете себя сильнее?",
+    "Рассматриваете ли платное обучение, если не проходите на бюджет?"
+  ]},
+  { id: "choice", title: "Выбор вуза", items: [
+    "Какие университеты вы ещё рассматриваете?",
+    "Что для вас важно при выборе вуза?",
+    "Вы планируете учиться в Великом Новгороде или сравниваете с другими городами?",
+    "Что может повлиять на ваше итоговое решение?"
+  ]},
+  { id: "doubts", title: "Сомнения", items: [
+    "Что сейчас больше всего мешает определиться?",
+    "Есть ли вопросы, которые остаются непонятными?",
+    "Что для вас главный риск при выборе университета?",
+    "Какая информация помогла бы вам принять решение?"
+  ]},
+  { id: "objections", title: "Возражения", isObjections: true, items: [
+    { obj: "У вас низкие рейтинги по сравнению с СПб", ans: "«Понимаю, рейтинг важен. По конкретно вашему направлению у нас сильная кафедра и [факт о практике/проекте]. Какое направление вы рассматриваете — расскажу детально?»" },
+    { obj: "Лучше уехать в столицу", ans: "«Это понятный выбор. Скажите, что вы видите главным минусом учёбы здесь? Часто мы можем закрыть этот вопрос — общежитие, стажировки, конкретные программы.»" },
+    { obj: "После вашего вуза работы не будет", ans: "«Хороший вопрос. По вашему направлению у нас договоры с [компании/предприятия]. Хотите, пришлю список — посмотрите, кому интересны выпускники?»" },
+    { obj: "Платное — слишком дорого", ans: "«Понимаю. Давайте посмотрим: проходные на бюджет, рассрочка, материнский капитал, скидки за высокие баллы. Что из этого реалистично для вашей семьи?»" },
+    { obj: "Далеко от дома, неудобно", ans: "«Расскажите, откуда вы — посмотрим, как удобнее добираться, какое общежитие. У нас [процент] иногородних, есть отлаженная логистика.»" },
+    { obj: "Я ещё не определился", ans: "«Это нормально. Давайте сузим: какие предметы даются легче, что точно не нравится. Через 5 минут получим 2–3 направления-кандидата.»" }
+  ]},
+];
+
+const SIMULATOR = [
+  {
+    id: 1,
+    title: "Не знает баллы",
+    opening: "Я пока не знаю, сколько баллов наберу. Просто хотел узнать, куда можно поступить.",
+    options: [
+      { text: "Когда узнаете баллы, тогда обращайтесь.", score: "bad", explain: "Закрываем диалог раньше времени. Теряем контакт и возможность повлиять на решение." },
+      { text: "Без баллов сложно что-то конкретное сказать.", score: "mid", explain: "Не закрываем, но и не помогаем. Абитуриент уйдёт думать без поддержки." },
+      { text: "Давайте уже сейчас посмотрим, какие направления могут подойти. Какие экзамены вы сдаёте?", score: "good", explain: "Переводим к выявлению ситуации. Получаем точку входа для рекомендации." }
+    ],
+    criteria: ["Уточнил ситуацию", "Получил данные", "Зафиксировал контакт", "Следующий шаг", "Снял тревогу"]
+  },
+  {
+    id: 2,
+    title: "Выбор между НовГУ и СПб",
+    opening: "Я выбираю между НовГУ и университетом в Санкт-Петербурге.",
+    options: [
+      { text: "Конечно, СПб — большой выбор, но и у нас есть плюсы. Что вас смущает?", score: "mid", explain: "Не плохо, но мы сразу заняли оборонительную позицию. Лучше понять критерии." },
+      { text: "Хорошо, важный выбор. Что для вас важнее: направление, бюджет, общежитие, город, практика или трудоустройство?", score: "good", explain: "Переводим конкуренцию между вузами в плоскость конкретных критериев. Дальше можно работать предметно." },
+      { text: "В Питере дорого жить и сильная конкуренция. Лучше у нас.", score: "bad", explain: "Принижаем конкурента и навязываем выбор. Абитуриент почувствует давление." }
+    ],
+    criteria: ["Выяснил критерии", "Снял возражение", "Получил данные", "Зафиксировал контакт", "Следующий шаг"]
+  },
+  {
+    id: 3,
+    title: "Родитель вместо абитуриента",
+    opening: "Сын ещё не определился, хотим просто понять варианты.",
+    options: [
+      { text: "Пусть сын сам позвонит, когда определится.", score: "bad", explain: "Игнорируем готовность родителя помочь. Теряем контакт, который через родителя ведёт к абитуриенту." },
+      { text: "Конечно. Давайте начнём с того, какие предметы он сдаёт и какие направления хотя бы примерно интересны. После этого подскажу возможные траектории.", score: "good", explain: "Мягко структурируем разговор. Родитель уйдёт с конкретикой, которую передаст сыну." },
+      { text: "У нас много направлений, посмотрите на сайте.", score: "mid", explain: "Не закрыли диалог, но и не помогли. Родитель уйдёт без понимания, что делать дальше." }
+    ],
+    criteria: ["Включил родителя", "Структурировал ситуацию", "Получил данные", "Зафиксировал контакт", "Следующий шаг"]
+  },
+  {
+    id: 4,
+    title: "Боится не пройти на бюджет",
+    opening: "Я боюсь, что не пройду на бюджет. Наверное, нет смысла подавать.",
+    options: [
+      { text: "Да, конкуренция большая. Подумайте.", score: "bad", explain: "Усиливаем тревогу и подталкиваем к отказу. Абитуриент уходит без помощи." },
+      { text: "Шанс всё равно есть, попробуйте.", score: "mid", explain: "Не помогает: общие слова не дают плана. Тревога остаётся." },
+      { text: "Давайте не будем заранее исключать варианты. Какие экзамены сдаёте и на какие баллы рассчитываете? Посмотрим возможные направления и альтернативные траектории.", score: "good", explain: "Снимаем тревогу через конкретный план: смотрим реальные варианты, обсуждаем платное как страховку." }
+    ],
+    criteria: ["Снял тревогу", "Получил данные", "Дал конкретный план", "Зафиксировал контакт", "Следующий шаг"]
+  },
+  {
+    id: 5,
+    title: "Возражение: рейтинги",
+    opening: "У вас рейтинги слабые, мне знакомые сказали лучше в [другой вуз].",
+    options: [
+      { text: "Рейтинги — это не главное, у нас сильные преподаватели.", score: "mid", explain: "Защищаемся, но без конкретики. Возражение не снято." },
+      { text: "Понимаю. По какому конкретно направлению вам сказали — посмотрим, что предлагаем мы, и сравним фактами: преподаватели, базы практик, выпускники.", score: "good", explain: "Перехватываем в фактическое сравнение по конкретному направлению. Возражение становится темой для разговора." },
+      { text: "Эти рейтинги вообще не объективные.", score: "bad", explain: "Спор с источником информации. Абитуриент закроется." }
+    ],
+    criteria: ["Снял возражение", "Уточнил направление", "Дал факты", "Зафиксировал контакт", "Следующий шаг"]
+  },
+  {
+    id: 6,
+    title: "Иногородний, общежитие",
+    opening: "Я из другого региона. Подскажите, есть ли общежитие?",
+    options: [
+      { text: "Да, общежитие есть. Информация на сайте.", score: "bad", explain: "Дали справку и отпустили. Не использовали возможность собрать данные и помочь." },
+      { text: "Да, общежитие есть. Расскажите, откуда вы и какое направление рассматриваете — подскажу, какое общежитие ближе и как с пропиской.", score: "good", explain: "Используем вопрос как точку входа. Получаем регион, направление, и абитуриент видит заботу." },
+      { text: "Общежитие предоставляется иногородним по квоте. Подайте документы — там разберёмся.", score: "mid", explain: "Формально ответили, но не выявили потребность." }
+    ],
+    criteria: ["Дал ответ", "Уточнил регион", "Уточнил направление", "Зафиксировал контакт", "Следующий шаг"]
+  },
+  {
+    id: 7,
+    title: "После колледжа",
+    opening: "Я закончил колледж, поступаю по среднему. Куда у вас можно?",
+    options: [
+      { text: "У нас на ряд направлений принимаем выпускников колледжа. По какой специальности у вас диплом — подскажу подходящие направления с экзаменами по среднему.", score: "good", explain: "Сразу к делу: диплом → подходящие направления. Конкретно и быстро." },
+      { text: "Принимаем, посмотрите на сайте список программ.", score: "mid", explain: "Не используем точку входа. Абитуриент уйдёт в общий раздел и может потеряться." },
+      { text: "По среднему сложно, лучше через ЕГЭ.", score: "bad", explain: "Сразу отталкиваем. Хотя путь через колледж — рабочая траектория." }
+    ],
+    criteria: ["Уточнил диплом", "Дал варианты", "Получил данные", "Зафиксировал контакт", "Следующий шаг"]
+  },
+  {
+    id: 8,
+    title: "Просит время подумать",
+    opening: "Спасибо, я подумаю и сам напишу позже.",
+    options: [
+      { text: "Хорошо, ждём.", score: "bad", explain: "Контакт потерян. С 80% вероятностью абитуриент не вернётся." },
+      { text: "Конечно. Можно я запишу ваш телефон и через неделю наберу — узнать, появились ли вопросы?", score: "good", explain: "Уважительно фиксируем контакт и договариваемся о следующем шаге. «Мяч» на нашей стороне." },
+      { text: "Может быть, лучше прямо сейчас подадим документы?", score: "bad", explain: "Давление в момент сомнения = абитуриент уйдёт быстрее." }
+    ],
+    criteria: ["Принял ответ", "Зафиксировал контакт", "Договорился о времени", "Следующий шаг", "Без давления"]
+  }
+];
+
+const CHECKLIST = [
+  "Первичный вопрос закрыт",
+  "Ситуация абитуриента уточнена",
+  "Интересующее направление понятно",
+  "Экзамены или примерные баллы зафиксированы",
+  "Контакт получен",
+  "Сомнения или барьеры выявлены",
+  "Следующий шаг предложен",
+  "Повторный контакт согласован"
+];
+
+const ATTESTATION = [
+  {
+    q: "Абитуриент говорит «Я ещё не знаю баллы». Что делать?",
+    options: [
+      "Сказать обратиться после результатов",
+      "Уточнить экзамены и интересы, дать ориентир",
+      "Записать в очередь на повторный звонок без обсуждения"
+    ],
+    correct: 1
+  },
+  {
+    q: "Что в первую очередь нужно собрать на первом контакте?",
+    options: [
+      "Только имя и телефон",
+      "Имя, телефон, направление, экзамены",
+      "Полный паспортный номер и аттестат"
+    ],
+    correct: 1
+  },
+  {
+    q: "Абитуриент сравнивает НовГУ с вузом в СПб. Лучший ответ:",
+    options: [
+      "Принизить конкурента",
+      "Спросить о критериях выбора",
+      "Сразу предложить подать к нам"
+    ],
+    correct: 1
+  },
+  {
+    q: "Что значит «закрыть разговор следующим шагом»?",
+    options: [
+      "Дать ответ и попрощаться",
+      "Договориться о конкретном следующем действии (звонок, встреча)",
+      "Записать на курсы подготовки"
+    ],
+    correct: 1
+  },
+  {
+    q: "Звонит родитель, а не абитуриент. Что делать?",
+    options: [
+      "Отказать в консультации",
+      "Помочь структурировать вопросы для сына/дочери",
+      "Передать звонок дежурному"
+    ],
+    correct: 1
+  },
+  {
+    q: "На возражение «работы потом не будет» правильнее всего:",
+    options: [
+      "Согласиться и развести руками",
+      "Привести конкретные базы практик и выпускников",
+      "Сказать, что это от человека зависит"
+    ],
+    correct: 1
+  },
+  {
+    q: "Главная цель разговора с абитуриентом:",
+    options: [
+      "Ответить на вопрос максимально подробно",
+      "Понять ситуацию и предложить следующий шаг",
+      "Записать на платное"
+    ],
+    correct: 1
+  },
+  {
+    q: "Когда уместно сказать «информация есть на сайте»?",
+    options: [
+      "Когда не хочется отвечать",
+      "Когда вопрос специфический — но с точным указанием раздела",
+      "Когда абитуриент кажется неподготовленным"
+    ],
+    correct: 1
+  },
+  {
+    q: "Если абитуриент говорит «я подумаю», правильно:",
+    options: [
+      "Согласиться и ждать звонка",
+      "Зафиксировать контакт и договориться, когда перезвонить",
+      "Уговорить решить сейчас"
+    ],
+    correct: 1
+  },
+  {
+    q: "Какой признак показывает, что разговор был успешным?",
+    options: [
+      "Абитуриент сказал спасибо",
+      "Получены данные, зафиксирован контакт, согласован следующий шаг",
+      "Разговор длился более 15 минут"
+    ],
+    correct: 1
+  }
+];
+
+/* ============================================================
+   СОСТОЯНИЕ
+   ============================================================ */
+const state = {
+  role: null,
+  funnelStep: null,
+  simulator: { completed: {} },
+  checklist: new Set(),
+  attestation: { current: 0, answers: {}, score: 0, finished: false, name: '' }
+};
+
+function saveProgress() {
+  try {
+    localStorage.setItem('novgu_state', JSON.stringify({
+      role: state.role,
+      simulator_completed: Object.keys(state.simulator.completed),
+      checklist: [...state.checklist]
+    }));
+  } catch(e) {}
+}
+
+function loadProgress() {
+  try {
+    const raw = localStorage.getItem('novgu_state');
+    if (!raw) return;
+    const p = JSON.parse(raw);
+    if (p.role) selectRole(p.role, true);
+    if (p.simulator_completed) p.simulator_completed.forEach(id => { state.simulator.completed[id] = true; });
+    if (p.checklist) p.checklist.forEach(i => state.checklist.add(i));
+  } catch(e) {}
+}
+
+/* ============================================================
+   АНАЛИТИКА (заглушка для Метрики)
+   ============================================================ */
+function track(event, data = {}) {
+  console.log('[track]', event, data);
+  if (window.ym) window.ym(0, 'reachGoal', event, data);
+}
+
+/* ============================================================
+   ВЫБОР РОЛИ
+   ============================================================ */
+function selectRole(role, silent = false) {
+  state.role = role;
+  document.querySelectorAll('.role-card').forEach(c => {
+    c.classList.toggle('active', c.dataset.role === role);
+  });
+  if (!silent) {
+    track('role_selected', { role });
+    saveProgress();
+  }
+}
+
+document.getElementById('roleGrid').addEventListener('click', (e) => {
+  const card = e.target.closest('.role-card');
+  if (!card) return;
+  selectRole(card.dataset.role);
+});
+
+/* ============================================================
+   ВОРОНКА
+   ============================================================ */
+function renderFunnel() {
+  const list = document.getElementById('funnelList');
+  list.innerHTML = FUNNEL_STEPS.map((s, i) => `
+    <button class="funnel-step" data-idx="${i}">
+      <div class="funnel-step-num">${i + 1}</div>
+      <div class="funnel-step-title">${s.title}</div>
+    </button>
+  `).join('');
+  list.addEventListener('click', e => {
+    const step = e.target.closest('.funnel-step');
+    if (!step) return;
+    const idx = +step.dataset.idx;
+    showFunnelDetail(idx);
+  });
+}
+
+function showFunnelDetail(idx) {
+  document.querySelectorAll('.funnel-step').forEach((el, i) => {
+    el.classList.toggle('active', i === idx);
+  });
+  const s = FUNNEL_STEPS[idx];
+  const detail = document.getElementById('funnelDetail');
+  detail.innerHTML = `
+    <span class="role">${s.role}</span>
+    <h3>${idx + 1}. ${s.title}</h3>
+    <p>${s.text}</p>
+    ${s.list ? '<ul>' + s.list.map(i => `<li>${i}</li>`).join('') + '</ul>' : ''}
+  `;
+  track('funnel_step_clicked', { step: idx + 1 });
+}
+
+/* ============================================================
+   7 ШАГОВ
+   ============================================================ */
+function renderSteps() {
+  const grid = document.getElementById('stepsGrid');
+  grid.innerHTML = STEPS.map((s, i) => `
+    <div class="step-card" data-idx="${i}">
+      <div class="step-card-head">
+        <div class="step-card-num">${i + 1}</div>
+        <h4>${s.title}</h4>
+      </div>
+      <div class="phrase">${s.phrase}</div>
+      <div class="toggle">Показать пример →</div>
+    </div>
+  `).join('');
+  grid.addEventListener('click', e => {
+    const card = e.target.closest('.step-card');
+    if (!card) return;
+    card.classList.toggle('expanded');
+    const tgl = card.querySelector('.toggle');
+    tgl.textContent = card.classList.contains('expanded') ? 'Свернуть' : 'Показать пример →';
+  });
+}
+
+/* ============================================================
+   ВКЛАДКИ
+   ============================================================ */
+function renderTabs() {
+  const nav = document.getElementById('tabsNav');
+  const content = document.getElementById('tabsContent');
+  nav.innerHTML = TABS.map((t, i) => `
+    <button data-idx="${i}" class="${i === 0 ? 'active' : ''}">${t.title}</button>
+  `).join('');
+  content.innerHTML = TABS.map((t, i) => `
+    <div class="tab-panel ${i === 0 ? 'active' : ''}" data-idx="${i}">
+      ${t.isObjections
+        ? t.items.map(o => `
+          <div class="objection">
+            <div><strong>${o.obj}</strong></div>
+            <div>
+              <div class="answer-label">Лучше</div>
+              <div class="answer">${o.ans}</div>
+            </div>
+          </div>
+        `).join('')
+        : '<ul>' + t.items.map(i => `<li>${i}</li>`).join('') + '</ul>'}
+    </div>
+  `).join('');
+  nav.addEventListener('click', e => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    const idx = +btn.dataset.idx;
+    nav.querySelectorAll('button').forEach(b => b.classList.toggle('active', +b.dataset.idx === idx));
+    content.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', +p.dataset.idx === idx));
+  });
+}
+
+/* ============================================================
+   ТРЕНАЖЁР
+   ============================================================ */
+function renderSimList() {
+  const list = document.getElementById('simList');
+  list.innerHTML = SIMULATOR.map(s => `
+    <button class="sim-list-item ${state.simulator.completed[s.id] ? 'completed' : ''}" data-id="${s.id}">
+      <span class="sim-num">№${s.id}</span>
+      <span class="sim-title">${s.title}</span>
+      <svg class="check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+    </button>
+  `).join('');
+  list.addEventListener('click', e => {
+    const item = e.target.closest('.sim-list-item');
+    if (!item) return;
+    showSituation(+item.dataset.id);
+  });
+  updateSimProgress();
+}
+
+function showSituation(id) {
+  const sit = SIMULATOR.find(s => s.id === id);
+  const stage = document.getElementById('simStage');
+  stage.innerHTML = `
+    <div class="sim-reply">
+      <div class="who">Абитуриент</div>
+      <div class="text">${sit.opening}</div>
+    </div>
+    <div class="sim-options">
+      ${sit.options.map((o, i) => `<button class="sim-option" data-idx="${i}">${o.text}</button>`).join('')}
+    </div>
+    <div class="sim-feedback" id="simFeedback"></div>
+  `;
+  stage.classList.add('active');
+  stage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  stage.querySelectorAll('.sim-option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = +btn.dataset.idx;
+      const choice = sit.options[idx];
+      // Подсветить все варианты
+      stage.querySelectorAll('.sim-option').forEach((b, i) => {
+        b.disabled = true;
+        b.classList.add(sit.options[i].score + '-revealed');
+      });
+      // Показать обратную связь
+      const fb = document.getElementById('simFeedback');
+      const verdict = choice.score === 'good' ? 'Хорошо' : choice.score === 'mid' ? 'Средне' : 'Слабо';
+      fb.className = 'sim-feedback show ' + choice.score;
+      fb.innerHTML = `
+        <div class="label">${verdict}</div>
+        <p>${choice.explain}</p>
+        ${choice.score === 'good' ? `
+          <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);">
+            <div style="font-size: 0.85rem; opacity: 0.7; margin-bottom: 8px;">Закрытые критерии:</div>
+            <div class="sim-criteria">
+              ${sit.criteria.map(c => `<div class="sim-criterion met">✓ ${c}</div>`).join('')}
+            </div>
+          </div>
+        ` : ''}
+        <div class="sim-next">
+          <button class="btn btn-sm btn-secondary" onclick="closeSituation()">Закрыть</button>
+          ${choice.score === 'good'
+            ? `<button class="btn btn-sm btn-accent" onclick="completeSituation(${id})">Засчитать ✓</button>`
+            : `<button class="btn btn-sm btn-primary" onclick="showSituation(${id})">Попробовать снова</button>`
+          }
+        </div>
+      `;
+      track('simulator_turn_choice', { situation: id, score: choice.score });
+    });
+  });
+  track('simulator_situation_started', { situation: id });
+}
+
+function closeSituation() {
+  document.getElementById('simStage').classList.remove('active');
+}
+
+function completeSituation(id) {
+  state.simulator.completed[id] = true;
+  saveProgress();
+  renderSimList();
+  closeSituation();
+  track('simulator_situation_completed', { situation: id });
+}
+
+function updateSimProgress() {
+  const total = SIMULATOR.length;
+  const done = Object.keys(state.simulator.completed).length;
+  document.getElementById('simProgress').textContent = `Пройдено: ${done} из ${total}`;
+}
+
+/* ============================================================
+   ЧЕК-ЛИСТ
+   ============================================================ */
+function renderChecklist() {
+  const wrap = document.getElementById('checklistItems');
+  wrap.innerHTML = CHECKLIST.map((item, i) => `
+    <div class="checklist-item ${state.checklist.has(item) ? 'checked' : ''}" data-item="${item}">
+      <div class="checklist-checkbox"></div>
+      <div class="checklist-text">${item}</div>
+    </div>
+  `).join('');
+  wrap.addEventListener('click', e => {
+    const it = e.target.closest('.checklist-item');
+    if (!it) return;
+    const key = it.dataset.item;
+    if (state.checklist.has(key)) state.checklist.delete(key);
+    else state.checklist.add(key);
+    it.classList.toggle('checked');
+    saveProgress();
+    updateChecklistComplete();
+  });
+  updateChecklistComplete();
+}
+
+function updateChecklistComplete() {
+  const done = state.checklist.size;
+  const complete = document.getElementById('checklistComplete');
+  complete.classList.toggle('show', done >= 6);
+  if (done === CHECKLIST.length) track('checklist_completed');
+}
+
+/* ============================================================
+   АТТЕСТАЦИЯ
+   ============================================================ */
+function startAttestation() {
+  document.getElementById('attestationIntro').style.display = 'none';
+  document.getElementById('attestationForm').classList.add('active');
+  state.attestation.current = 0;
+  state.attestation.answers = {};
+  renderAttQuestion();
+  track('attestation_started');
+}
+
+function renderAttQuestion() {
+  const wrap = document.getElementById('attestationQuestions');
+  wrap.innerHTML = ATTESTATION.map((q, i) => `
+    <div class="attestation-q ${i === state.attestation.current ? 'active' : ''}">
+      <div class="attestation-q-head">
+        <span class="attestation-q-num">Вопрос ${i + 1} из ${ATTESTATION.length}</span>
+      </div>
+      <div class="attestation-q-text">${q.q}</div>
+      <div class="attestation-options">
+        ${q.options.map((o, j) => `
+          <button class="attestation-option ${state.attestation.answers[i] === j ? 'selected' : ''}" data-q="${i}" data-opt="${j}">${o}</button>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+  wrap.querySelectorAll('.attestation-option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const q = +btn.dataset.q;
+      const opt = +btn.dataset.opt;
+      state.attestation.answers[q] = opt;
+      wrap.querySelectorAll(`[data-q="${q}"]`).forEach(b => b.classList.toggle('selected', +b.dataset.opt === opt));
+    });
+  });
+  document.getElementById('attPrev').style.visibility = state.attestation.current === 0 ? 'hidden' : 'visible';
+  document.getElementById('attNext').textContent = state.attestation.current === ATTESTATION.length - 1 ? 'Завершить' : 'Далее';
+}
+
+function navAttestation(dir) {
+  if (dir === 1 && state.attestation.current === ATTESTATION.length - 1) {
+    finishAttestation();
+    return;
+  }
+  state.attestation.current = Math.max(0, Math.min(ATTESTATION.length - 1, state.attestation.current + dir));
+  renderAttQuestion();
+}
+
+function finishAttestation() {
+  let score = 0;
+  ATTESTATION.forEach((q, i) => {
+    if (state.attestation.answers[i] === q.correct) score++;
+  });
+  state.attestation.score = score;
+  state.attestation.finished = true;
+  document.getElementById('attestationForm').classList.remove('active');
+  const result = document.getElementById('attestationResult');
+  const passed = score >= 8;
+  result.className = 'attestation-result active ' + (passed ? 'passed' : 'failed');
+  result.innerHTML = `
+    <div class="score">${score}/10</div>
+    <div class="verdict">${passed ? 'Аттестация пройдена' : 'Нужно пройти ещё раз'}</div>
+    <p>${passed
+      ? 'Поздравляем. Введите имя — сгенерируем именной сертификат.'
+      : 'Минимум для прохождения — 8 из 10. Освежите материал и попробуйте снова.'}</p>
+    ${passed ? `
+      <input type="text" class="attestation-name" id="certName" placeholder="Введите ФИО для сертификата">
+      <button class="btn btn-primary btn-lg" onclick="generateCert()">Получить сертификат</button>
+    ` : `
+      <button class="btn btn-primary btn-lg" onclick="restartAttestation()">Пройти ещё раз</button>
+    `}
+  `;
+  track(passed ? 'attestation_passed' : 'attestation_failed', { score });
+}
+
+function restartAttestation() {
+  document.getElementById('attestationResult').classList.remove('active');
+  document.getElementById('attestationIntro').style.display = 'block';
+}
+
+function generateCert() {
+  const name = document.getElementById('certName').value.trim();
+  if (!name) { alert('Введите ФИО'); return; }
+  state.attestation.name = name;
+  const date = new Date().toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' });
+  document.getElementById('printArea').innerHTML = `
+    <div class="certificate">
+      <p style="font-size: 0.9rem; color: #6B7280; letter-spacing: 0.2em; text-transform: uppercase;">Сертификат</p>
+      <h1 style="margin-top: 16px;">Прохождение обучения</h1>
+      <p style="margin-top: 20px;">Настоящим подтверждается, что</p>
+      <div class="cert-name">${name}</div>
+      <p>успешно прошёл(ла) обучение по программе<br><strong>«От консультации к поступлению»</strong><br>с результатом ${state.attestation.score} из 10</p>
+      <div class="cert-meta">
+        <p>Новгородский государственный университет<br>Приёмная комиссия · ${date}</p>
+      </div>
+    </div>
+  `;
+  window.print();
+  track('certificate_generated');
+}
+
+/* ============================================================
+   ПЕЧАТЬ КАРТОЧКИ
+   ============================================================ */
+function printCard() {
+  document.getElementById('printArea').innerHTML = `
+    <div style="font-family: inherit;">
+      <h1 style="color: #1B3A6B; margin-bottom: 16px;">Карточка сотрудника ПК НовГУ</h1>
+      <p style="color: #6B7280; margin-bottom: 24px;">A5 · сторона 1: алгоритм. Сторона 2: вопросы.</p>
+
+      <h2 style="color: #1B3A6B; margin-bottom: 12px;">7 шагов разговора</h2>
+      <ol style="padding-left: 20px; line-height: 1.8;">
+        ${STEPS.map((s, i) => `<li><strong>${s.title}</strong><br><span style="color: #6B7280; font-size: 0.9rem;">${s.phrase}</span></li>`).join('')}
+      </ol>
+
+      <div style="page-break-before: always;"></div>
+
+      <h2 style="color: #1B3A6B; margin: 24px 0 12px;">Банк вопросов</h2>
+      ${TABS.filter(t => !t.isObjections).map(t => `
+        <h3 style="color: #00A4B4; margin-top: 16px;">${t.title}</h3>
+        <ul style="padding-left: 20px;">
+          ${t.items.map(i => `<li>${i}</li>`).join('')}
+        </ul>
+      `).join('')}
+
+      <h2 style="color: #1B3A6B; margin-top: 24px;">Топ возражений</h2>
+      ${TABS.find(t => t.isObjections).items.slice(0, 5).map(o => `
+        <p style="margin-bottom: 12px;"><strong style="color: #EF4444;">— ${o.obj}</strong><br>${o.ans}</p>
+      `).join('')}
+    </div>
+  `;
+  window.print();
+  track('asset_downloaded', { type: 'card' });
+}
+
+function downloadCRMTemplate() {
+  const csv = '﻿' + [
+    'Поле,Обязательно,Описание',
+    'Имя,Да,ФИО абитуриента',
+    'Телефон,Да,Основной канал связи',
+    'Направление,Да,Что рассматривает',
+    'Экзамены,Да,Список ЕГЭ или средний балл (колледж)',
+    'Ожидаемые баллы,Нет,Самооценка для подбора вариантов',
+    'Другие вузы,Нет,Конкурентная ситуация',
+    'Город,Нет,Регион проживания',
+    'Сомнения,Нет,Что мешает определиться',
+    'Удобное время связи,Да,Когда перезвонить',
+    'Канал обращения,Да,Звонок / ВК / Telegram / лично',
+    'Дата следующего шага,Да,Когда вернуться к диалогу',
+    'Ответственный,Да,Кто ведёт абитуриента'
+  ].join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'crm-template.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+  track('asset_downloaded', { type: 'crm_template' });
+}
+
+/* ============================================================
+   ПРОГРЕСС-БАР
+   ============================================================ */
+function updateProgressBar() {
+  const scrolled = window.scrollY;
+  const total = document.body.scrollHeight - window.innerHeight;
+  const pct = Math.min(100, (scrolled / total) * 100);
+  document.getElementById('progressBar').style.width = pct + '%';
+}
+window.addEventListener('scroll', updateProgressBar, { passive: true });
+
+/* ============================================================
+   INIT
+   ============================================================ */
+function init() {
+  renderFunnel();
+  renderSteps();
+  renderTabs();
+  renderSimList();
+  renderChecklist();
+  loadProgress();
+  updateProgressBar();
+  track('landing_open');
+}
+init();
+</script>
+</body>
+</html>
