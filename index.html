@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>От консультации к поступлению — НовГУ</title>
-<meta name="description" content="Обучающий лендинг для сотрудников приёмной комиссии НовГУ: как вести абитуриента по воронке поступления.">
+<title>Коммуникация с абитуриентами — НовГУ. Игропрактика</title>
+<meta name="description" content="Игропрактика для сотрудников приёмной комиссии НовГУ: из вопроса в запрос контактов и подачу документов. Проработка речевых модулей для общения по переписке и при звонке.">
 <style>
 /* ============================================================
    1. ПЕРЕМЕННЫЕ И БАЗА
@@ -164,39 +164,69 @@ section.alt { background: var(--surface); }
 .btn-lg { padding: 16px 36px; font-size: 1.05rem; }
 
 /* ============================================================
-   6. ЭКРАН 0 — ВЫБОР РОЛИ
+   6. СПИКЕРЫ И КАНАЛЫ ВХОДЯЩИХ
    ============================================================ */
-.role-selector {
-  padding: 60px 0 40px;
-  background: linear-gradient(180deg, #F0F4FA 0%, var(--bg) 100%);
+.speakers-chip {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: rgba(27,58,107,0.06);
+  color: var(--primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 28px;
 }
-.role-grid {
+.speakers-chip .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+.channels-section {
+  padding: 60px 0;
+  background: linear-gradient(180deg, var(--bg) 0%, #F0F4FA 100%);
+}
+.channels-head { text-align: center; max-width: 720px; margin: 0 auto 32px; }
+.channels-head h3 { font-size: clamp(1.3rem, 2.5vw, 1.7rem); margin-bottom: 8px; }
+.channels-head p { color: var(--text-muted); font-size: 0.95rem; }
+.channels-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   max-width: 980px;
-  margin: 32px auto 0;
+  margin: 0 auto;
 }
-.role-card {
+.channel-card {
   background: var(--surface);
-  border: 2px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 24px 20px;
-  text-align: left;
-  cursor: pointer;
+  padding: 24px 18px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
   transition: all var(--transition);
 }
-.role-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: var(--shadow-md); }
-.role-card.active { border-color: var(--primary); background: rgba(27,58,107,0.03); }
-.role-card .role-icon {
-  width: 44px; height: 44px; border-radius: 10px;
-  background: rgba(0,164,180,0.1); color: var(--accent);
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 12px;
+.channel-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--accent); }
+.channel-card .channel-num {
+  font-size: 2.4rem; font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+  margin-bottom: 6px;
 }
-.role-card.active .role-icon { background: var(--primary); color: white; }
-.role-card h4 { margin-bottom: 4px; color: var(--text); }
-.role-card p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+.channel-card .channel-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.channels-total {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+.channels-total strong { color: var(--primary); font-weight: 700; }
+
+@media (max-width: 700px) {
+  .channels-grid { grid-template-columns: repeat(2, 1fr); }
+  .channel-card .channel-num { font-size: 2rem; }
+}
 
 /* ============================================================
    7. HERO
@@ -852,65 +882,22 @@ section.alt { background: var(--surface); }
 </header>
 
 <!-- ============================================================
-     ЭКРАН 0 — ВЫБОР РОЛИ
-     ============================================================ -->
-<section class="role-selector" id="role">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Шаг 1 из 10</span>
-      <h2>Выберите свою роль</h2>
-      <p class="lead">Подсветим релевантные сценарии. Можно сменить в любой момент.</p>
-    </div>
-    <div class="role-grid" id="roleGrid">
-      <button class="role-card" data-role="hotline">
-        <div class="role-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        </div>
-        <h4>Горячая линия</h4>
-        <p>Принимаю звонки, ограничен по времени</p>
-      </button>
-      <button class="role-card" data-role="office">
-        <div class="role-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg>
-        </div>
-        <h4>Очная ПК</h4>
-        <p>Работаю за столом, абитуриент пришёл лично</p>
-      </button>
-      <button class="role-card" data-role="institute">
-        <div class="role-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-        </div>
-        <h4>Представитель института</h4>
-        <p>Веду абитуриентов по конкретному направлению</p>
-      </button>
-      <button class="role-card" data-role="social">
-        <div class="role-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-        </div>
-        <h4>Соцсети и мессенджеры</h4>
-        <p>Веду переписку в ВК, Telegram</p>
-      </button>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     ЭКРАН 1 — HERO
+     ЭКРАН 1 — HERO (тема игропрактики)
      ============================================================ -->
 <section class="hero" id="hero">
   <div class="container">
     <div class="hero-inner">
-      <h1>От консультации<br>к поступлению</h1>
-      <p class="lead">Как приёмной комиссии НовГУ вести абитуриента по воронке: выявлять потребности, собирать данные и доводить до подачи документов.</p>
+      <span class="eyebrow">Игропрактика</span>
+      <h1>Коммуникация с абитуриентами: из&nbsp;вопроса в&nbsp;запрос контактов и&nbsp;подачу документов</h1>
+      <p class="lead">Проработка речевых модулей для общения по переписке и при звонке.</p>
 
-      <div class="hero-stat">
-        <div class="hero-stat-number">72%</div>
-        <div class="hero-stat-text">абитуриентов выбирают вуз после <strong>первого живого контакта</strong></div>
+      <div class="speakers-chip">
+        <span class="dot"></span>
+        <span>Спикеры: Даниил Зозуленко · Надежда Козырева</span>
       </div>
 
       <div class="hero-cta">
-        <a href="#funnel" class="btn btn-primary btn-lg">Начать разбор</a>
-        <a href="#checklist" class="btn btn-secondary btn-lg">Экспресс 5 минут</a>
+        <a href="#channels" class="btn btn-primary btn-lg">Начать разбор</a>
       </div>
 
       <div class="hero-path">
@@ -924,6 +911,40 @@ section.alt { background: var(--surface); }
         <div class="hero-path-arrow">→</div>
         <div class="hero-path-step"><span class="dot"></span>Студент НовГУ</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ЭКРАН 2 — КАНАЛЫ ВХОДЯЩИХ (реальная статистика ПК)
+     ============================================================ -->
+<section class="channels-section" id="channels">
+  <div class="container">
+    <div class="channels-head">
+      <span class="eyebrow">Каналы входящих</span>
+      <h3>Откуда приходят абитуриенты</h3>
+      <p>Статистика приёмной комиссии НовГУ за май 2026.</p>
+    </div>
+    <div class="channels-grid">
+      <div class="channel-card">
+        <div class="channel-num">266</div>
+        <div class="channel-name">Звонки</div>
+      </div>
+      <div class="channel-card">
+        <div class="channel-num">19</div>
+        <div class="channel-name">MAX</div>
+      </div>
+      <div class="channel-card">
+        <div class="channel-num">17</div>
+        <div class="channel-name">ВКонтакте</div>
+      </div>
+      <div class="channel-card">
+        <div class="channel-num">2</div>
+        <div class="channel-name">Email</div>
+      </div>
+    </div>
+    <div class="channels-total">
+      <strong>304 обращения</strong> за месяц. Каждое — точка входа в воронку поступления.
     </div>
   </div>
 </section>
@@ -1247,8 +1268,8 @@ const SIMULATOR = [
   },
   {
     id: 3,
-    title: "Родитель вместо абитуриента",
-    opening: "Сын ещё не определился, хотим просто понять варианты.",
+    title: "Родитель пишет в MAX",
+    opening: "Здравствуйте. Пишу про сына — он ещё не определился, хотим просто понять варианты.",
     options: [
       { text: "Пусть сын сам позвонит, когда определится.", score: "bad", explain: "Игнорируем готовность родителя помочь. Теряем контакт, который через родителя ведёт к абитуриенту." },
       { text: "Конечно. Давайте начнём с того, какие предметы он сдаёт и какие направления хотя бы примерно интересны. После этого подскажу возможные траектории.", score: "good", explain: "Мягко структурируем разговор. Родитель уйдёт с конкретикой, которую передаст сыну." },
@@ -1280,8 +1301,8 @@ const SIMULATOR = [
   },
   {
     id: 6,
-    title: "Иногородний, общежитие",
-    opening: "Я из другого региона. Подскажите, есть ли общежитие?",
+    title: "Общежитие на договорной",
+    opening: "Есть ли общежитие для обучающихся на договорной основе?",
     options: [
       { text: "Да, общежитие есть. Информация на сайте.", score: "bad", explain: "Дали справку и отпустили. Не использовали возможность собрать данные и помочь." },
       { text: "Да, общежитие есть. Расскажите, откуда вы и какое направление рассматриваете — подскажу, какое общежитие ближе и как с пропиской.", score: "good", explain: "Используем вопрос как точку входа. Получаем регион, направление, и абитуриент видит заботу." },
@@ -1291,14 +1312,14 @@ const SIMULATOR = [
   },
   {
     id: 7,
-    title: "После колледжа",
-    opening: "Я закончил колледж, поступаю по среднему. Куда у вас можно?",
+    title: "Второе высшее, инженер",
+    opening: "Какое направление можно выбрать по инженерной специальности? У меня уже есть высшее.",
     options: [
-      { text: "У нас на ряд направлений принимаем выпускников колледжа. По какой специальности у вас диплом — подскажу подходящие направления с экзаменами по среднему.", score: "good", explain: "Сразу к делу: диплом → подходящие направления. Конкретно и быстро." },
-      { text: "Принимаем, посмотрите на сайте список программ.", score: "mid", explain: "Не используем точку входа. Абитуриент уйдёт в общий раздел и может потеряться." },
-      { text: "По среднему сложно, лучше через ЕГЭ.", score: "bad", explain: "Сразу отталкиваем. Хотя путь через колледж — рабочая траектория." }
+      { text: "Уточните, какое у вас образование — направление и год выпуска. От этого зависит, по каким программам можно поступать без вступительных или с внутренними экзаменами.", score: "good", explain: "Не угадываем направление — собираем входные данные. После этого даём конкретный список." },
+      { text: "У нас много инженерных направлений, посмотрите на сайте список.", score: "mid", explain: "Не используем точку входа. Абитуриент уйдёт в общий раздел и может потеряться." },
+      { text: "На инженерные направления второе высшее обычно платно, лучше выбирать самим.", score: "bad", explain: "Сразу отталкиваем без уточнения. Платное — не приговор, а одна из траекторий." }
     ],
-    criteria: ["Уточнил диплом", "Дал варианты", "Получил данные", "Зафиксировал контакт", "Следующий шаг"]
+    criteria: ["Уточнил образование", "Дал варианты", "Получил данные", "Зафиксировал контакт", "Следующий шаг"]
   },
   {
     id: 8,
@@ -1314,9 +1335,9 @@ const SIMULATOR = [
 ];
 
 const CHECKLIST = [
-  "Первичный вопрос закрыт",
-  "Ситуация абитуриента уточнена",
-  "Интересующее направление понятно",
+  "Первичный запрос закрыт",
+  "Выявленная потребность зафиксирована",
+  "Интересующее направление определено",
   "Экзамены или примерные баллы зафиксированы",
   "Контакт получен",
   "Сомнения или барьеры выявлены",
@@ -1421,7 +1442,6 @@ const ATTESTATION = [
    СОСТОЯНИЕ
    ============================================================ */
 const state = {
-  role: null,
   funnelStep: null,
   simulator: { completed: {} },
   checklist: new Set(),
@@ -1431,7 +1451,6 @@ const state = {
 function saveProgress() {
   try {
     localStorage.setItem('novgu_state', JSON.stringify({
-      role: state.role,
       simulator_completed: Object.keys(state.simulator.completed),
       checklist: [...state.checklist]
     }));
@@ -1443,7 +1462,6 @@ function loadProgress() {
     const raw = localStorage.getItem('novgu_state');
     if (!raw) return;
     const p = JSON.parse(raw);
-    if (p.role) selectRole(p.role, true);
     if (p.simulator_completed) p.simulator_completed.forEach(id => { state.simulator.completed[id] = true; });
     if (p.checklist) p.checklist.forEach(i => state.checklist.add(i));
   } catch(e) {}
@@ -1456,26 +1474,6 @@ function track(event, data = {}) {
   console.log('[track]', event, data);
   if (window.ym) window.ym(0, 'reachGoal', event, data);
 }
-
-/* ============================================================
-   ВЫБОР РОЛИ
-   ============================================================ */
-function selectRole(role, silent = false) {
-  state.role = role;
-  document.querySelectorAll('.role-card').forEach(c => {
-    c.classList.toggle('active', c.dataset.role === role);
-  });
-  if (!silent) {
-    track('role_selected', { role });
-    saveProgress();
-  }
-}
-
-document.getElementById('roleGrid').addEventListener('click', (e) => {
-  const card = e.target.closest('.role-card');
-  if (!card) return;
-  selectRole(card.dataset.role);
-});
 
 /* ============================================================
    ВОРОНКА
